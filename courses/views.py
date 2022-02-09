@@ -3,11 +3,23 @@ from django.shortcuts import render
 # Create your views here.
 from .models import Course
 
+
 def index(request):
     courses = Course.objects.all()
     template_name = 'courses/index.html'
-    #contexto = compact do php
+    # contexto = compact do php
     context = {
         'courses': courses
     }
+    return render(request, template_name, context)
+
+
+def details(request, pk):
+    course = Course.objects.get(pk=pk)
+    template_name = 'courses/details.html'
+
+    context = {
+        'course': course
+    }
+
     return render(request, template_name, context)
